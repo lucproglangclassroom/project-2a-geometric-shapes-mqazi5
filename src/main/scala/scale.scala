@@ -1,14 +1,15 @@
 package edu.luc.cs.laufer.cs371.shapes
 
-import com.typesafe.scalalogging.Logger
+import org.log4s.getLogger
 import Shape.*
 
 object scale:
-  private val logger = Logger("scale")
+  // Ensure logging configuration is initialized (simplelogger.properties controls default level)
+  private val logger = getLogger
 
-  def apply(s: Shape, factor: Double): Shape = {
+  def apply(s: Shape, factor: Double): Shape =
     logger.debug(s"Scaling shape: $s by factor: $factor")
-    s match {
+    s match
       case Rectangle(width, height) =>
         val result = Rectangle((width * factor).round.toInt, (height * factor).round.toInt)
         logger.debug(s"Scaled Rectangle: $result")
@@ -27,7 +28,6 @@ object scale:
         val result = Group(scaledShapes*)
         logger.debug(s"Scaled Group: $result")
         result
-    }
-  }
 
 end scale
+
